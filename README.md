@@ -52,17 +52,17 @@ Full stack interview materials
 
 ## Data Binding Types
 
-- **Interpolation:** Display component properties in HTML ({{property}}).
+- **Interpolation:** Display component properties in HTML `({{property}})`.
 
-- **Property Binding:** Bind component properties to HTML attributes ([property] = 'value').
+- **Property Binding:** Bind component properties to HTML attributes `([property] = 'value')`.
 
-- **Attribute Binding:** Set attributes in HTML ([attr.attribute] = 'value').
+- **Attribute Binding:** Set attributes in HTML `([attr.attribute] = 'value')`.
 
-- **Class Binding:** Add or remove classes ([class.class-name] = 'condition').
+- **Class Binding:** Add or remove classes `([class.class-name] = 'condition')`.
 
-- **Style Binding:** Set styles dynamically ([style.property] = 'value').
+- **Style Binding:** Set styles dynamically `([style.property] = 'value')`.
 
-- **Two-Way Binding:** Use [(ngModel)] for bidirectional data binding; import FormsModule from @angular/forms.
+- **Two-Way Binding:** Use `[(ngModel)]` for bidirectional data binding; `import FormsModule from @angular/forms`.
 
 
 
@@ -72,9 +72,9 @@ Full stack interview materials
 
 - **Types:**
 
-  - **Structural Directives:** Change DOM structure (*ngFor, *ngIf, *ngSwitch).
+  - **Structural Directives:** Change DOM structure (`*ngFor`, `*ngIf`, `*ngSwitch`).
 
-  - **Attribute Directives:** Modify behavior (NgStyle, NgClass).
+  - **Attribute Directives:** Modify behavior (`NgStyle`, `NgClass`).
 
 
 
