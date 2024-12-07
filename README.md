@@ -122,7 +122,7 @@ Full stack interview materials
 ## Other materials:
 ## .NET Core
 
-### Updated C# Notes with Examples  
+### OOPS
 
 #### Encapsulation  
 - **Definition:** Mechanism to bind methods and data members in a single unit (e.g., a class). Prevents unauthorized access to the data from outside.  
@@ -241,151 +241,255 @@ Full stack interview materials
   }
   var dog = new Dog(); // Output: Animal Constructor  
   ```
-### SOLID Principles in C# with Examples  
+---
+### Basic C#
 
-#### S - Single Responsibility Principle (SRP)  
-- **Definition:** A class should have only one reason to change; it should perform a single responsibility.  
+#### Common Language Runtime (CLR)
+- **Definition:** Provides runtime environment for thread management, type safety, and memory management.  
 - **Example:**  
   ```csharp
-  // Violating SRP: Handling both data and logging in the same class
-  class Employee {
-      public void Save() => Console.WriteLine("Employee Saved.");
-      public void Log() => Console.WriteLine("Log: Employee Saved.");
-  }
-
-  // Correct SRP implementation
-  class Employee {
-      public void Save() => Console.WriteLine("Employee Saved.");
-  }
-  class Logger {
-      public void Log(string message) => Console.WriteLine($"Log: {message}");
-  }
+  // CLR handles memory allocation for this object.
+  object obj = new object();
   ```
 
 ---
 
-#### O - Open/Closed Principle (OCP)  
-- **Definition:** A class should be open for extension but closed for modification.  
+#### Enum
+- **Definition:** A value type that assigns string values to integers.  
 - **Example:**  
   ```csharp
-  // Violating OCP
-  class Discount {
-      public double CalculateDiscount(string customerType) {
-          if (customerType == "Regular") return 0.1;
-          if (customerType == "Premium") return 0.2;
-          return 0.0;
+  enum Days { Sunday, Monday, Tuesday }
+  Console.WriteLine((int)Days.Monday); // Output: 1
+  ```
+
+---
+
+#### `ref`
+- **Definition:** Pass arguments by reference.  
+- **Example:**  
+  ```csharp
+  void UpdateValue(ref int number) { number = 10; }
+  int num = 5;
+  UpdateValue(ref num);
+  Console.WriteLine(num); // Output: 10
+  ```
+
+---
+
+#### `out`
+- **Definition:** Used to return values from a method.  
+- **Example:**  
+  ```csharp
+  void GetValues(out int a, out int b) { a = 5; b = 10; }
+  GetValues(out int x, out int y);
+  Console.WriteLine(x + y); // Output: 15
+  ```
+
+---
+
+#### Properties
+- **Definition:** Used to read or set private fields.  
+- **Example:**  
+  ```csharp
+  class Person {
+      private string name;
+      public string Name {
+          get { return name; }
+          set { name = value; }
       }
   }
+  var person = new Person();
+  person.Name = "John";
+  Console.WriteLine(person.Name); // Output: John
+  ```
 
-  // Correct OCP implementation
-  abstract class Discount {
-      public abstract double GetDiscount();
-  }
-  class RegularDiscount : Discount {
-      public override double GetDiscount() => 0.1;
-  }
-  class PremiumDiscount : Discount {
-      public override double GetDiscount() => 0.2;
+---
+
+#### `is` Operator
+- **Definition:** Checks if an object is of a specific type.  
+- **Example:**  
+  ```csharp
+  object obj = "Hello";
+  if (obj is string) Console.WriteLine("It is a string."); // Output: It is a string.
+  ```
+
+---
+
+#### `as` Operator
+- **Definition:** Safely casts an object to a specific type.  
+- **Example:**  
+  ```csharp
+  object obj = "Hello";
+  string str = obj as string;
+  Console.WriteLine(str); // Output: Hello
+  ```
+
+---
+
+#### Namespace
+- **Definition:** Groups related classes.  
+- **Example:**  
+  ```csharp
+  namespace MyNamespace {
+      class MyClass { }
   }
   ```
 
 ---
 
-#### L - Liskov Substitution Principle (LSP)  
-- **Definition:** Subclasses should be replaceable for their base classes without altering the program's correctness.  
+#### Garbage Collection
+- **Definition:** Automatically manages memory for unused objects.  
 - **Example:**  
   ```csharp
-  // Violating LSP
-  class Rectangle {
-      public virtual int Width { get; set; }
-      public virtual int Height { get; set; }
-  }
-  class Square : Rectangle {
-      public override int Width { 
-          set { base.Width = base.Height = value; } 
-      }
-      public override int Height { 
-          set { base.Width = base.Height = value; } 
-      }
-  }
+  object obj = new object();
+  obj = null; // Garbage Collector will free memory.
+  ```
 
-  // Correct LSP implementation
-  interface IShape {
-      int Area();
+---
+
+#### Extension Methods
+- **Definition:** Add methods to existing classes without modifying them.  
+- **Example:**  
+  ```csharp
+  public static class StringExtensions {
+      public static bool IsEmpty(this string str) => string.IsNullOrEmpty(str);
   }
-  class Rectangle : IShape {
-      public int Width { get; set; }
-      public int Height { get; set; }
-      public int Area() => Width * Height;
-  }
-  class Square : IShape {
-      public int Side { get; set; }
-      public int Area() => Side * Side;
+  Console.WriteLine("".IsEmpty()); // Output: True
+  ```
+
+---
+
+#### Partial Class
+- **Definition:** Splits a class across multiple files.  
+- **Example:**  
+  ```csharp
+  partial class MyClass { void Method1() {} }
+  partial class MyClass { void Method2() {} }
+  ```
+
+---
+
+#### Method Overloading
+- **Definition:** Methods with the same name but different signatures.  
+- **Example:**  
+  ```csharp
+  void Print(int num) => Console.WriteLine(num);
+  void Print(string str) => Console.WriteLine(str);
+  Print(5);       // Output: 5
+  Print("Hello"); // Output: Hello
+  ```
+
+---
+
+#### Managed Code
+- **Definition:** Executed by the .NET runtime.  
+- **Example:**  
+  ```csharp
+  Console.WriteLine("Managed Code!");
+  ```
+
+---
+
+#### Unmanaged Code
+- **Definition:** Directly executed by the OS.  
+- **Example:** Code written in C or C++ compiled as a DLL used in .NET.
+
+---
+
+#### Multithreading
+- **Definition:** Multiple threads in a single process.  
+- **Example:**  
+  ```csharp
+  Thread thread = new Thread(() => Console.WriteLine("Thread running"));
+  thread.Start();
+  ```
+
+---
+
+#### Delegate
+- **Definition:** Refers to a method.  
+- **Example:**  
+  ```csharp
+  delegate void PrintDelegate(string message);
+  void Print(string message) => Console.WriteLine(message);
+  PrintDelegate pd = Print;
+  pd("Hello"); // Output: Hello
+  ```
+
+---
+
+#### Sealed Class
+- **Definition:** Prevents inheritance.  
+- **Example:**  
+  ```csharp
+  sealed class MyClass { }
+  ```
+
+---
+
+#### Generics
+- **Definition:** Allows type parameters in methods, classes, or interfaces.  
+- **Example:**  
+  ```csharp
+  class Box<T> { public T Value; }
+  var box = new Box<int> { Value = 10 };
+  Console.WriteLine(box.Value); // Output: 10
+  ```
+
+---
+
+#### Boxing
+- **Definition:** Converts value type to reference type.  
+- **Example:**  
+  ```csharp
+  int num = 10;
+  object obj = num; // Boxing
+  ```
+
+---
+
+#### Unboxing
+- **Definition:** Converts reference type to value type.  
+- **Example:**  
+  ```csharp
+  object obj = 10;
+  int num = (int)obj; // Unboxing
+  ```
+
+---
+
+#### Interface
+- **Definition:** A contract with no implementation.  
+- **Example:**  
+  ```csharp
+  interface IAnimal { void Speak(); }
+  class Dog : IAnimal { public void Speak() => Console.WriteLine("Bark"); }
+  ```
+
+---
+
+#### Static
+- **Definition:** Members shared across all instances.  
+- **Example:**  
+  ```csharp
+  class MyClass {
+      public static int Count = 0;
   }
   ```
 
 ---
 
-#### I - Interface Segregation Principle (ISP)  
-- **Definition:** Clients should not be forced to depend on interfaces they do not use.  
-- **Example:**  
-  ```csharp
-  // Violating ISP
-  interface IWorker {
-      void Work();
-      void Eat();
-  }
-  class Robot : IWorker {
-      public void Work() => Console.WriteLine("Robot working.");
-      public void Eat() => throw new NotImplementedException(); // Robot doesn't eat
-  }
-
-  // Correct ISP implementation
-  interface IWorker {
-      void Work();
-  }
-  interface IEater {
-      void Eat();
-  }
-  class Human : IWorker, IEater {
-      public void Work() => Console.WriteLine("Human working.");
-      public void Eat() => Console.WriteLine("Human eating.");
-  }
-  class Robot : IWorker {
-      public void Work() => Console.WriteLine("Robot working.");
-  }
-  ```
+#### Dependency Injection
+- **Definition:** Inject dependencies at runtime.  
 
 ---
 
-#### D - Dependency Inversion Principle (DIP)  
-- **Definition:** High-level modules should not depend on low-level modules; both should depend on abstractions.  
-- **Example:**  
-  ```csharp
-  // Violating DIP
-  class FileStorage {
-      public void Store(string data) => Console.WriteLine($"Stored: {data}");
-  }
-  class Report {
-      private FileStorage storage = new FileStorage();
-      public void Generate(string content) => storage.Store(content);
-  }
+#### Middleware
+- **Definition:** Software components in the request pipeline.  
+- **Example:**  Authentication, logging, routing
 
-  // Correct DIP implementation
-  interface IStorage {
-      void Store(string data);
-  }
-  class FileStorage : IStorage {
-      public void Store(string data) => Console.WriteLine($"Stored: {data}");
-  }
-  class Report {
-      private IStorage storage;
-      public Report(IStorage storage) => this.storage = storage;
-      public void Generate(string content) => storage.Store(content);
-  }
-  ```
 
-### C# and API Notes  
+---
 
 #### **Dependency Lifecycle**  
 1. **Transient**  
@@ -537,7 +641,152 @@ public class UsersController : ControllerBase {
     }
 }
 ```
-  
+---
+
+### SOLID Principles in C# with Examples  
+
+#### S - Single Responsibility Principle (SRP)  
+- **Definition:** A class should have only one reason to change; it should perform a single responsibility.  
+- **Example:**  
+  ```csharp
+  // Violating SRP: Handling both data and logging in the same class
+  class Employee {
+      public void Save() => Console.WriteLine("Employee Saved.");
+      public void Log() => Console.WriteLine("Log: Employee Saved.");
+  }
+
+  // Correct SRP implementation
+  class Employee {
+      public void Save() => Console.WriteLine("Employee Saved.");
+  }
+  class Logger {
+      public void Log(string message) => Console.WriteLine($"Log: {message}");
+  }
+  ```
+
+---
+
+#### O - Open/Closed Principle (OCP)  
+- **Definition:** A class should be open for extension but closed for modification.  
+- **Example:**  
+  ```csharp
+  // Violating OCP
+  class Discount {
+      public double CalculateDiscount(string customerType) {
+          if (customerType == "Regular") return 0.1;
+          if (customerType == "Premium") return 0.2;
+          return 0.0;
+      }
+  }
+
+  // Correct OCP implementation
+  abstract class Discount {
+      public abstract double GetDiscount();
+  }
+  class RegularDiscount : Discount {
+      public override double GetDiscount() => 0.1;
+  }
+  class PremiumDiscount : Discount {
+      public override double GetDiscount() => 0.2;
+  }
+  ```
+
+---
+
+#### L - Liskov Substitution Principle (LSP)  
+- **Definition:** Subclasses should be replaceable for their base classes without altering the program's correctness.  
+- **Example:**  
+  ```csharp
+  // Violating LSP
+  class Rectangle {
+      public virtual int Width { get; set; }
+      public virtual int Height { get; set; }
+  }
+  class Square : Rectangle {
+      public override int Width { 
+          set { base.Width = base.Height = value; } 
+      }
+      public override int Height { 
+          set { base.Width = base.Height = value; } 
+      }
+  }
+
+  // Correct LSP implementation
+  interface IShape {
+      int Area();
+  }
+  class Rectangle : IShape {
+      public int Width { get; set; }
+      public int Height { get; set; }
+      public int Area() => Width * Height;
+  }
+  class Square : IShape {
+      public int Side { get; set; }
+      public int Area() => Side * Side;
+  }
+  ```
+
+---
+
+#### I - Interface Segregation Principle (ISP)  
+- **Definition:** Clients should not be forced to depend on interfaces they do not use.  
+- **Example:**  
+  ```csharp
+  // Violating ISP
+  interface IWorker {
+      void Work();
+      void Eat();
+  }
+  class Robot : IWorker {
+      public void Work() => Console.WriteLine("Robot working.");
+      public void Eat() => throw new NotImplementedException(); // Robot doesn't eat
+  }
+
+  // Correct ISP implementation
+  interface IWorker {
+      void Work();
+  }
+  interface IEater {
+      void Eat();
+  }
+  class Human : IWorker, IEater {
+      public void Work() => Console.WriteLine("Human working.");
+      public void Eat() => Console.WriteLine("Human eating.");
+  }
+  class Robot : IWorker {
+      public void Work() => Console.WriteLine("Robot working.");
+  }
+  ```
+
+---
+
+#### D - Dependency Inversion Principle (DIP)  
+- **Definition:** High-level modules should not depend on low-level modules; both should depend on abstractions.  
+- **Example:**  
+  ```csharp
+  // Violating DIP
+  class FileStorage {
+      public void Store(string data) => Console.WriteLine($"Stored: {data}");
+  }
+  class Report {
+      private FileStorage storage = new FileStorage();
+      public void Generate(string content) => storage.Store(content);
+  }
+
+  // Correct DIP implementation
+  interface IStorage {
+      void Store(string data);
+  }
+  class FileStorage : IStorage {
+      public void Store(string data) => Console.WriteLine($"Stored: {data}");
+  }
+  class Report {
+      private IStorage storage;
+      public Report(IStorage storage) => this.storage = storage;
+      public void Generate(string content) => storage.Store(content);
+  }
+  ```
+---
 ## Database SQL Server
 
 #### Database  
